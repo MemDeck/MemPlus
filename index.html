@@ -9,7 +9,7 @@
         body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             height: 100vh;
             margin: 0;
@@ -20,6 +20,7 @@
 
         h2 {
             margin-bottom: 20px;
+            margin-top: 20px;
         }
 
         input, button {
@@ -31,12 +32,12 @@
         }
 
         #challenge {
-            font-size: 24px; /* Increased font size */
-            margin-bottom: 20px;
-            text-align: center; /* Center the text */
-            word-wrap: break-word; /* Ensure long words or sentences wrap to the next line */
-            word-break: break-word; /* Break words if they are too long to fit */
-            max-width: 90%; /* Ensure it doesn’t overflow on small screens */
+            font-size: 24px; /* Keeps the font large */
+            margin: 20px 0; /* Adds space above and below */
+            text-align: center; /* Centers the text */
+            word-wrap: break-word; /* Ensures wrapping on small screens */
+            word-break: break-word;
+            max-width: 90%; /* Prevents overflow */
         }
 
         #feedback {
