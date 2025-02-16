@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mnemonica Trainer</title>
+    <style>
+        /* Centering everything on the page */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            width: 250px;
+            text-align: center;
+        }
+
+        #challenge {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        #feedback {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Mnemonica Stack</h2>
+    <button onclick="generateChallenge()">Challenge</button>
+    <p id="challenge"></p>
+    
+    <input type="text" id="userAnswer" placeholder="" oninput="convertToUpper()">
+    <button onclick="checkAnswer()">Submit</button>
+    <p id="feedback"></p>
+
+    <script>
+        const mnemonicaStack = {
+            1: "4C", 2: "2H", 3: "7D", 4: "3C", 5: "4H", 6: "6D", 7: "AS", 8: "5H", 9: "9S", 
+            10: "2S", 11: "QH", 12: "3D", 13: "QC", 14: "8H", 15: "6S", 16: "5S", 17: "9H", 
+            18: "KC", 19: "2D", 20: "JH", 21: "3S", 22: "8S", 23: "6H", 24: "XC", 25: "5D", 
+            26: "KD", 27: "2C", 28: "3H", 29: "8D", 30: "5C", 31: "KS", 32: "JD", 33: "8C", 
+            34: "XS", 35: "KH", 36: "JC", 37: "7S", 38: "XH", 39: "AD", 40: "4S", 41: "7H", 
+            42: "4D", 43: "AC", 44: "9C", 45: "JS", 46: "QD", 47: "7C", 48: "QS", 49: "XD", 
+            50: "6C", 51: "AH", 52: "9D"
+        };
+
+        let correctAnswer = "";
+
+        function generateChallenge() {
+            document.getElementById("feedback").innerText = "";
+            document.getElementById("userAnswer").value = "";
+
+            let questionType = Math.random() < 0.5 ? "position" : "distance"; // Random question type
+            
+            if (questionType === "position") {
+                generatePositionChallenge();
+            } else {
+                generateDistanceChallenge();
+            }
+        }
+
+        function generatePositionChallenge() {
+            let startPosition = Math.floor(Math.random() * 52) + 1;
+            let startCard = mnemonicaStack[startPosition];
+
+            let offset = Math.floor(Math.random() * 13) + 1;
+            let targetPosition = (startPosition + offset - 1) % 52 + 1;
+            let targetCard = mnemonicaStack[targetPosition];
+
+            correctAnswer = targetCard.toUpperCase();
+            document.getElementById("challenge").innerText = 
+                `What card is ${offset} cards ahead of ${startCard.toUpperCase()}?`;
+        }
+
+        function generateDistanceChallenge() {
+            let startPosition = Math.floor(Math.random() * 52) + 1;
+            let startCard = mnemonicaStack[startPosition];
+
+            let offset = Math.floor(Math.random() * 13) + 1;
+            let targetPosition = (startPosition + offset - 1) % 52 + 1;
+            let targetCard = mnemonicaStack[targetPosition];
+
+            correctAnswer = offset.toString();
+            document.getElementById("challenge").innerText = 
+                `What is the numeric distance from ${startCard.toUpperCase()} to ${targetCard.toUpperCase()}?`;
+        }
+
+        function checkAnswer() {
+            let userInput = document.getElementById("userAnswer").value.trim().toUpperCase();
+            if (userInput === correctAnswer.toUpperCase()) {
+                document.getElementById("feedback").innerText = "Correct";
+            } else {
+                document.getElementById("feedback").innerText = `Incorrect. The answer is ${correctAnswer}`;
+            }
+        }
+
+        function convertToUpper() {
+            let inputField = document.getElementById("userAnswer");
+            inputField.value = inputField.value.toUpperCase();
+        }
+    </script>
+</body>
+</html>
