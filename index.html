@@ -14,6 +14,8 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+            padding: 20px; /* Add padding to prevent overflow on small screens */
+            box-sizing: border-box;
         }
 
         h2 {
@@ -31,6 +33,10 @@
         #challenge {
             font-size: 24px; /* Increased font size */
             margin-bottom: 20px;
+            text-align: center; /* Center the text */
+            word-wrap: break-word; /* Ensure long words or sentences wrap to the next line */
+            word-break: break-word; /* Break words if they are too long to fit */
+            max-width: 90%; /* Ensure it doesn’t overflow on small screens */
         }
 
         #feedback {
